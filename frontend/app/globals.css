@@ -9,13 +9,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
 
+/* stlyes that apply to all pages */
+/* anything that's specific to a page or a component should be
+implemented somewhere else */
+
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 1rem;
 }
