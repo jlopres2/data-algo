@@ -1,9 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
-import ProductCard from "./components/ProductCard";
 import LogIn from "./components/LogIn";
+import { auth } from "@/auth/authSetup";
 
-export default function Home() {
+export default async function Home() {
+
+  const session = await auth()
   
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -16,13 +17,22 @@ export default function Home() {
 
       {/* Buttons for login and stats */}
       <div className="flex flex-col items-center gap-4">
-        
-        <LogIn />
-        <Link 
-          href="/stats" 
-          className="btn btn-wide">
-          Check my stats
-        </Link>
+        {!session ? (
+          <LogIn /> // Show the LogIn component if user is not signed in
+        ) : (
+          <>
+            <Link 
+              href="/quiz" 
+              className="btn btn-wide">
+              Start Practicing
+            </Link> 
+            <Link 
+              href="/stats" 
+              className="btn btn-wide">
+              Check my stats
+            </Link>
+          </>
+        )}
       </div>
 
       {/* not the optimal way to nav because it reloads repetetive parts */}
